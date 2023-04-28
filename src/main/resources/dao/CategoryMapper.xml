@@ -4,8 +4,8 @@
 <mapper namespace="org.example.mapper.CategoryMapper">
     <select id="selectCount" resultType="Integer">
         SELECT COUNT(*) FROM pms_product_category WHERE delete_time IS NULL
-        <if test="parentId!=null">
-            AND parent_id = #{parentId}
+        <if test="id!=null">
+            AND id = #{id}
         </if>
         <if test="name!=null and name!=''">
             AND name = #{name}
@@ -17,19 +17,82 @@
 
     <select id="selectList" resultType="org.example.entity.po.PmsProductCategoryPo">
         SELECT
-            id, parent_id, name, level, product_count, product_unit, nav_status, show_status, sort,
-            icon, keywords, description, create_time, update_time, delete_time
+        id,
+        parent_id,
+        name,
+        level,
+        product_count,
+        product_unit,
+        nav_status,
+        show_status,
+        sort,
+        icon,
+        keywords,
+        description,
+        create_time,
+        update_time,
+        delete_time
         FROM
-            pms_product_category WHERE delete_time IS NULL
-        <if test="parentId!=null">
-            AND parent_id = #{parentId}
+        pms_product_category
+        WHERE
+        delete_time IS NULL
+        <if test="id != null">
+            AND id = #{id}
         </if>
-        <if test="name!=null and name!=''">
+        <if test="name != null and name != ''">
             AND name = #{name}
         </if>
-        <if test="level!=null">
+        <if test="level != null">
             AND level = #{level}
         </if>
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
+
+    <insert id="insertPo" parameterType="org.example.entity.po.PmsProductCategoryPo">
+        INSERT INTO pms_product_category (
+            parent_id,
+            name,
+            level,
+            product_count,
+            product_unit,
+            nav_status,
+            show_status,
+            sort,
+            icon,
+            keywords,
+            description
+        ) VALUES (
+            #{parentId},
+            #{name},
+            #{level},
+            #{productCount},
+            #{productUnit},
+            #{navStatus},
+            #{showStatus},
+            #{sort},
+            #{icon},
+            #{keywords},
+            #{description}
+            )
+    </insert>
+
+    <update id="updateByPo" parameterType="org.example.entity.po.PmsProductCategoryPo">
+        UPDATE pms_product_category
+        SET
+            name=#{name},
+            level=#{level},
+            product_count=#{productCount},
+            product_unit=#{productUnit},
+            nav_status=#{navStatus},
+            show_status=#{showStatus},
+            sort=#{sort}
+        WHERE id=#{id}
+    </update>
+
+    <update id="abolishById" parameterType="Long">
+        UPDATE pms_product_category
+        SET
+            delete_time=CURRENT_TIMESTAMP(3)
+        WHERE id=#{id}
+    </update>
 </mapper>

@@ -10,14 +10,20 @@ import java.util.List;
 public interface CategoryMapper {
 
     int selectCount(
-            @Param("parentId") Long parentId,
+            @Param("id") Long id,
             @Param("name") String name,
             @Param("level") Integer level);
 
     List<PmsProductCategoryPo> selectList(
-            @Param("parentId") Long parentId,
+            @Param("id") Long id,
             @Param("name") String name,
             @Param("level") Integer level,
             @Param("pageSize") Integer pageSize,
             @Param("offset") int offset);
+
+    int insertPo(PmsProductCategoryPo pmsProductCategoryPo);
+
+    int updateByPo(PmsProductCategoryPo pmsProductCategoryPo);
+
+    int abolishById(Long id);
 }
