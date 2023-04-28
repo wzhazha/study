@@ -1,0 +1,47 @@
+{
+  "groups": [
+    {
+      "name": "aes",
+      "type": "org.example.config.AESConfig",
+      "sourceType": "org.example.config.AESConfig"
+    },
+    {
+      "name": "key.content",
+      "type": "org.example.config.KeyConfig",
+      "sourceType": "org.example.config.KeyConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aes.init-vector",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.AESConfig"
+    },
+    {
+      "name": "aes.secret-key",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.AESConfig"
+    },
+    {
+      "name": "key.content.private-key-str",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.KeyConfig"
+    },
+    {
+      "name": "key.content.public-key-str",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.KeyConfig"
+    },
+    {
+      "name": "key.content.pwd-private-key",
+      "type": "java.security.PrivateKey",
+      "sourceType": "org.example.config.KeyConfig"
+    },
+    {
+      "name": "key.content.pwd-public-key",
+      "type": "java.security.PublicKey",
+      "sourceType": "org.example.config.KeyConfig"
+    }
+  ],
+  "hints": []
+}
