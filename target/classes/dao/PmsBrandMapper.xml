@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.PmsBrandMapper">
+    <select id="selectCount" resultType="Integer">
+        SELECT COUNT(*) FROM pms_brand
+        WHERE 1=1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="name != null and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="firstLetter != null">
+            AND first_letter = #{firstLetter}
+        </if>
+    </select>
+    
+    <select id="selectList" resultType="org.example.entity.po.PmsBrandPo">
+        SELECT
+            id,
+            name,
+            first_letter,
+            sort,
+            factory_status,
+            show_status,
+            product_count,
+            product_comment_count,
+            logo,
+            big_pic,
+            brand_story
+        FROM
+        pms_brand
+        WHERE 1=1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="name != null and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="firstLetter != null">
+            AND first_letter = #{firstLetter}
+        </if>
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+</mapper>
