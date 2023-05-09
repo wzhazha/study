@@ -16,6 +16,13 @@ mybatis:
     - classpath:dao/*.xml
     - classpath*:com/**/mapper/*.xml
 
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
+
 key:
   content:
     public-key-string: MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAi1yFQ9jBxvWXkriYn4I7tobrx3NQEIexs8U7DAhhbxlSbfTklaJeFCPhPKYXjQ4zYlCzDKtr2S2jD7jlez52BGIye3gQRU2WhWRL3f9ZxX3F/Gy6XjFncbgcPJNCH22M2zl+mSaGYOVVggyCT+Awh3NQsmgesnKggjAD/cBLkMVsULkwJjNNuIiT65PXVISthebDDGKfoWL3YTx6xxCkUMotCfRUwKsSq01oIyMm2l8bIHp3NtosnS/c9vtbzunGpVwnxfAoglteK0djnmEYshsEJ+wOKhs2TW3ouraLZqOyJIs6EucGVQe/1zeQwJkk8qr4mSg4mzUn/Hb3iDdHOe8i6oRfWYQ+c3ZUU3gCKufQe4NkOB9Rnd3v5Kh1Liu/b3VJIDQFvdP1SU+osA9DKp6qzjN7QSJXoCn+q4qazEl7EoGqUzd9q0F98JAEpi/bt+3jhAIASdmBl86KifLmyBQ7D8MPVSumbH/FdcvizYCEXGNRkLvQmTKr/08NC7pvAgMBAAE=
