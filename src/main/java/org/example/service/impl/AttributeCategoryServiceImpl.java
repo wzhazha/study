@@ -33,4 +33,14 @@ public class AttributeCategoryServiceImpl implements AttributeCategoryService {
                 .setAttributeCategoryList(result.getRecords())
                 .setTotalCount(result.getTotal());
     }
+
+    @Override
+    public int insertAttributeCategory(PmsProductAttributeCategory pmsProductAttributeCategory) {
+        return attributeCategoryMapper.insert(pmsProductAttributeCategory);
+    }
+
+    @Override
+    public int updateById(PmsProductAttributeCategory pmsProductAttributeCategory) {
+        return attributeCategoryMapper.updateById(pmsProductAttributeCategory);
+    }
 }
