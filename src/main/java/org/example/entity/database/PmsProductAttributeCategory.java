@@ -10,6 +10,6 @@ import lombok.experimental.Accessors;
 public class PmsProductAttributeCategory {
     private Long id;
     private String name;
-    private int attributeCount;
-    private int paramCount;
+    private Integer attributeCount;
+    private Integer paramCount;
 }

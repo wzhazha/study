@@ -6,6 +6,11 @@
       "sourceType": "org.example.config.AESConfig"
     },
     {
+      "name": "jwt",
+      "type": "org.example.config.JwtTokenConfig",
+      "sourceType": "org.example.config.JwtTokenConfig"
+    },
+    {
       "name": "key.content",
       "type": "org.example.config.KeyConfig",
       "sourceType": "org.example.config.KeyConfig"
@@ -21,6 +26,26 @@
       "name": "aes.secret-key",
       "type": "java.lang.String",
       "sourceType": "org.example.config.AESConfig"
+    },
+    {
+      "name": "jwt.expire-time",
+      "type": "java.lang.Long",
+      "sourceType": "org.example.config.JwtTokenConfig"
+    },
+    {
+      "name": "jwt.header-string",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.JwtTokenConfig"
+    },
+    {
+      "name": "jwt.secret-key",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.JwtTokenConfig"
+    },
+    {
+      "name": "jwt.token-prefix",
+      "type": "java.lang.String",
+      "sourceType": "org.example.config.JwtTokenConfig"
     },
     {
       "name": "key.content.private-key-str",

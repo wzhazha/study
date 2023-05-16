@@ -9,12 +9,12 @@ import org.example.entity.po.PmsProductCategoryPo;
 public class CategoryCreateBo {
     private Long parentId;
     private String name;
-    private int level;
-    private int productCount;
+    private Integer level;
+    private Integer productCount;
     private String productUnit;
-    private int navStatus;
-    private int showStatus;
-    private int sort;
+    private Integer navStatus;
+    private Integer showStatus;
+    private Integer sort;
     private String icon;
     private String keywords;
     private String description;
