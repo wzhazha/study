@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 
 @Service
@@ -48,7 +49,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     }
 
     @Override
-    public String login(String username, String password) throws Exception {
+    public String login(String username, String password, HttpServletResponse response) throws Exception {
         UmsAdmin umsAdmin = umsAdminMapper.selectByUsername(username);
         if (umsAdmin == null) {
             Asserts.fail("用户名错误");
@@ -62,6 +63,8 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             Asserts.fail("帐号已被禁用");
         }
         String token = jwtTokenConfig.generateToken(username);
+        response.setHeader("TK", token);
+        response.setHeader("Access-Control-Expose-Headers", "TK");
         return token;
     }
 }

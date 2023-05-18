@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +31,10 @@ public class UmsAdminController {
     }
 
     @PostMapping("/login")
-    public CommonResult login(@RequestBody UmsAdminLoginPojo umsAdminLoginPojo) throws Exception {
-        String token = umsAdminService.login(umsAdminLoginPojo.getUsername(), umsAdminLoginPojo.getPassword());
+    public CommonResult login(@RequestBody UmsAdminLoginPojo umsAdminLoginPojo, HttpServletResponse response)
+            throws Exception {
+        String token = umsAdminService
+                .login(umsAdminLoginPojo.getUsername(), umsAdminLoginPojo.getPassword(), response);
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
