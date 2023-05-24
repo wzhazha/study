@@ -20,7 +20,8 @@ public class AttributeCategoryController {
             @RequestParam(required = false, value = "id") Long id,
             @RequestParam(required = false, value = "name") String name,
             @RequestParam(required = false, value = "pageNum", defaultValue = "1") Integer pageNum,
-            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize
+    ) {
         AttributeCategoryVo list = attributeCategoryService.getAttributeCategory(id, name, pageNum, pageSize);
         return CommonResult.success(list);
     }
