@@ -28,7 +28,7 @@
         SELECT count(*) FROM ums_admin WHERE username = #{userName}
     </select>
 
-    <select id="selectByUsername" resultType="org.example.entity.database.UmsAdmin">
+    <select id="selectByUserName" resultType="org.example.entity.database.UmsAdmin">
         SELECT
             id,
             username,

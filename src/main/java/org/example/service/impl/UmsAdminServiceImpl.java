@@ -33,7 +33,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         umsAdmin.setStatus(1);
         //查询是否有相同用户名的用户
         String username = umsAdmin.getUsername();
-        int count = umsAdminMapper.countByUsername(username);
+        int count = umsAdminMapper.countByUserName(username);
         if (count > 0) {
             return null;
         }
@@ -50,7 +50,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public String login(String username, String password, HttpServletResponse response) throws Exception {
-        UmsAdmin umsAdmin = umsAdminMapper.selectByUsername(username);
+        UmsAdmin umsAdmin = umsAdminMapper.selectByUserName(username);
         if (umsAdmin == null) {
             Asserts.fail("用户名错误");
         }

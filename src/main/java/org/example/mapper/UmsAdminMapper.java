@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface UmsAdminMapper {
     int insert(UmsAdmin user);
 
-    int countByUsername(String userName);
+    int countByUserName(String userName);
 
-    UmsAdmin selectByUsername(String userName);
+    UmsAdmin selectByUserName(String userName);
 }
