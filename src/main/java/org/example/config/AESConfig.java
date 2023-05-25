@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class AESConfig {
     @Value("${aes.secret-key}")
     private String secretKey;
-    @Value("${aes.init-vector}")
-    private String initVector;
 
     public String getSecretKey() {
         return secretKey;
@@ -24,16 +22,7 @@ public class AESConfig {
         this.secretKey = secretKey;
     }
 
-    public String getInitVector() {
-        return initVector;
-    }
-
-    public void setInitVector(String initVector) {
-        this.initVector = initVector;
-    }
-
-    public AESConfig(@Value("${aes.secret-key}") String secretKey, @Value("${aes.init-vector}") String initVector) {
+    public AESConfig(@Value("${aes.secret-key}") String secretKey) {
         this.secretKey = secretKey;
-        this.initVector = initVector;
     }
 }

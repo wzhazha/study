@@ -30,7 +30,6 @@ key:
 
 aes:
   secret-key: xzIMtbp2+7WE3AlOWp0bwQ==
-  init-vector: egjQOCODctkcUjeKxA8qDg==
 
 jwt:
   secretKey: 'hello1234'  # 加密秘钥

@@ -39,7 +39,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         }
         //将密码进行加密操作
         String encodePassword = AESUtil
-                .encrypt(umsAdmin.getPassword(), aesConfig.getSecretKey(), aesConfig.getInitVector());
+                .encrypt(umsAdmin.getPassword(), aesConfig.getSecretKey());
         umsAdmin.setPassword(encodePassword);
         int insert = umsAdminMapper.insert(umsAdmin);
         if (insert < 0) {
@@ -55,7 +55,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             Asserts.fail("用户名错误");
         }
         String encodePassword = umsAdmin.getPassword();
-        String decryptPassword = AESUtil.decrypt(encodePassword, aesConfig.getSecretKey(), aesConfig.getInitVector());
+        String decryptPassword = AESUtil.decrypt(encodePassword, aesConfig.getSecretKey());
         if (!password.equals(decryptPassword)) {
             Asserts.fail("密码不正确");
         }
