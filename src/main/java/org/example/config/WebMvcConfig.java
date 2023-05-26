@@ -15,7 +15,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         log.info("Loading CORS configuration..........");
         registry
                 .addMapping("/**")
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("http://localhost:8000")
                 .allowedMethods("*")
                 .allowCredentials(true)
                 .maxAge(3600)
