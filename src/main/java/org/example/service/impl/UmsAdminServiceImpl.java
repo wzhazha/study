@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import org.example.config.JwtTokenConfig;
+import org.example.entity.vo.LoginUserVo;
 import org.example.exception.Asserts;
 import org.example.config.AESConfig;
 import org.example.entity.bo.UmsAdminCreateBo;
@@ -13,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 
@@ -63,8 +65,20 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             Asserts.fail("帐号已被禁用");
         }
         String token = jwtTokenConfig.generateToken(username);
-        response.setHeader("TK", token);
-        response.setHeader("Access-Control-Expose-Headers", "TK");
+        jwtTokenConfig.addTokenToRequest(response, token);
         return token;
+    }
+
+    @Override
+    public Object state(HttpServletRequest request) {
+        String tokenFromRequest = jwtTokenConfig.getTokenFromRequest(request);
+        String usernameFromToken = jwtTokenConfig.getUsernameFromToken(tokenFromRequest);
+        UmsAdmin umsAdmin = umsAdminMapper.selectByUserName(usernameFromToken);
+        return new LoginUserVo()
+            .setId(umsAdmin.getId())
+            .setUsername(umsAdmin.getUsername())
+            .setNickName(umsAdmin.getNickName())
+            .setNote(umsAdmin.getNote())
+            .setEmail(umsAdmin.getEmail());
     }
 }

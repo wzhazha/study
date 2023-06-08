@@ -1,15 +1,18 @@
 package org.example.config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.example.exception.JwtLoginException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +45,11 @@ public class JwtTokenConfig {
                 .compact();
     }
 
+    // 把token存到请求头中
+    public void addTokenToRequest(HttpServletResponse response, String token) {
+        response.setHeader(headerString, tokenPrefix + token);
+    }
+
     // 从Token中获取用户名
     public String getUsernameFromToken(String token) {
         return Jwts.parser()
@@ -52,14 +60,22 @@ public class JwtTokenConfig {
                 .toString();
     }
 
-    // 检查Token是否过期
+    // 检查Token是否合法 合法为ture
     public boolean checkToken(String token) {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token.replace(tokenPrefix, ""));
             return true;
         } catch (JwtException ex) {
-            return false;
+            throw new JwtLoginException("Illegal token!");
         }
+    }
+
+    // 检查Token是否过期 过期为ture
+    public boolean isTokenExpired(String token) {
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token.replace(tokenPrefix, "")).getBody();
+        Date now = new Date();
+        Date expiration = claims.getExpiration();
+        return now.after(expiration);
     }
 
     // 从请求头中获取Token

@@ -16,7 +16,7 @@ public class AttributeCategoryController {
     AttributeCategoryService attributeCategoryService;
 
     @GetMapping("")
-    public CommonResult<AttributeCategoryVo> getList(
+    public CommonResult<Object> getList(
             @RequestParam(required = false, value = "id") Long id,
             @RequestParam(required = false, value = "name") String name,
             @RequestParam(required = false, value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -27,7 +27,9 @@ public class AttributeCategoryController {
     }
 
     @PutMapping("")
-    public CommonResult putAttributeCategory(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
+    public CommonResult<Object> putAttributeCategory(
+            @RequestBody PmsProductAttributeCategory pmsProductAttributeCategory
+    ) {
         int count = attributeCategoryService.insertAttributeCategory(pmsProductAttributeCategory);
         if (count > 0) {
             return CommonResult.success(count);
@@ -36,7 +38,7 @@ public class AttributeCategoryController {
     }
 
     @PostMapping("")
-    public CommonResult postAttributeCategory(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
+    public CommonResult<Object> postAttributeCategory(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
         int count = attributeCategoryService.updateById(pmsProductAttributeCategory);
         if (count > 0) {
             return CommonResult.success(count);

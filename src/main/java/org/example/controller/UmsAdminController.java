@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class UmsAdminController {
     }
 
     @PostMapping("/login")
-    public CommonResult login(@RequestBody UmsAdminLoginPojo umsAdminLoginPojo, HttpServletResponse response)
+    public CommonResult<Object> login(@RequestBody UmsAdminLoginPojo umsAdminLoginPojo, HttpServletResponse response)
             throws Exception {
         String token = umsAdminService
                 .login(umsAdminLoginPojo.getUsername(), umsAdminLoginPojo.getPassword(), response);
@@ -42,5 +43,10 @@ public class UmsAdminController {
         tokenMap.put("token", token);
         tokenMap.put("tokenPrefix", tokenPrefix);
         return CommonResult.success(tokenMap);
+    }
+
+    @GetMapping("/info")
+    public CommonResult<Object> getAdminInfo(HttpServletRequest request) {
+        return CommonResult.success(umsAdminService.state(request));
     }
 }
