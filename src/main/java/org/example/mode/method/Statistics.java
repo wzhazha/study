@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
 public class Statistics {
     /**
      * 根据createTime计算一天每小时新增
-     * @param createTime  创建时间集合
+     * @param createTime  根据sql查询获得
+     * WHERE create_time BETWEEN #{t1} AND #{t2}
      * @return List
-     * Create By Open AI
      */
     private List<Integer> hourlyIncrement(List<Date> createTime) {
         List<Integer> hourlyUserCount = new ArrayList<>(24);
@@ -34,10 +34,10 @@ public class Statistics {
      * 计算过去每天新增数据
      * @param days 过去几天
      * @param startDate 过去开始时间
-     * @param createTime 创建时间集合
+     * @param createTime 根据sql查询获得
+     * WHERE create_time BETWEEN #{t1} AND #{t2}
      * @return List 根据days决定size
      * @throws ParseException
-     * Create By Open AI
      */
     private List<Integer> countDaysAgo(int days, String startDate, List<Date> createTime)
             throws ParseException {
