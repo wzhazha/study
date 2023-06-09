@@ -13,5 +13,7 @@ public interface UmsAdminService {
 
     Object state(HttpServletRequest request);
 
+    UmsAdmin loadUserByUsername(String userName);
+
 
 }

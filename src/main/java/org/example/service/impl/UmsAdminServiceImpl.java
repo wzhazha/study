@@ -81,4 +81,12 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             .setNote(umsAdmin.getNote())
             .setEmail(umsAdmin.getEmail());
     }
+
+    @Override
+    public UmsAdmin loadUserByUsername(String userName) {
+        if (userName == null) {
+            throw new NullPointerException();
+        }
+        return umsAdminMapper.selectByUserName(userName);
+    }
 }

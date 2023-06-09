@@ -1,6 +1,8 @@
 package org.example.interceptor;
 
 import org.example.config.JwtTokenConfig;
+import org.example.entity.database.UmsAdmin;
+import org.example.service.UmsAdminService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -15,8 +17,9 @@ import java.nio.charset.StandardCharsets;
 public class TokenVerifyInterceptor implements HandlerInterceptor {
 
   @Resource
-  JwtTokenConfig jwtTokenConfig;
-
+  private JwtTokenConfig jwtTokenConfig;
+  @Resource
+  private UmsAdminService umsAdminService;
   private boolean allowPass = false;
 
   public TokenVerifyInterceptor() {
@@ -31,19 +34,20 @@ public class TokenVerifyInterceptor implements HandlerInterceptor {
       }
       return allowPass;
     }
-    if (!jwtTokenConfig.checkToken(token)) {
+    String usernameFromToken = jwtTokenConfig.getUsernameFromToken(token);
+    if (usernameFromToken == null) {
       if (!allowPass) {
-        tips(response,"Unknown Token!");
+        tips(response,"Login Error!");
       }
       return allowPass;
     }
-    if (jwtTokenConfig.isTokenExpired(token)) {
+    UmsAdmin userDetails = this.umsAdminService.loadUserByUsername(usernameFromToken);
+    if (!jwtTokenConfig.validateToken(token, userDetails)) {
       if (!allowPass) {
         tips(response,"Login State Expire!");
       }
       return allowPass;
     }
-    String usernameFromToken = jwtTokenConfig.getUsernameFromToken(token);
     request.setAttribute("token-test", usernameFromToken);
     return !allowPass;
   }
